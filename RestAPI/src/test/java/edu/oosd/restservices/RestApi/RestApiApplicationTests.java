@@ -1,4 +1,4 @@
-package edu.oosd.restservices.RestAPI;
+package edu.oosd.restservices.RestApi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

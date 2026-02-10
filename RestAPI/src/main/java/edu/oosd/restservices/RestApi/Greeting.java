@@ -1,4 +1,4 @@
-package edu.oosd.restservices.RestAPI;
+package edu.oosd.restservices.RestApi;
 
 public class Greeting {
     private long id;

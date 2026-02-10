@@ -1,4 +1,4 @@
-package edu.oosd.restservices.RestAPI;
+package edu.oosd.restservices.RestApi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
