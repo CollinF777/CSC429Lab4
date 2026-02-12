@@ -14,32 +14,48 @@ public class GreetingController {
     private static final String template_home = "Hello! You are at %s";
     private final AtomicLong counter = new AtomicLong();
 
+    private Links generateLinks() {
+        return new Links(
+                "http://localhost:8080/",
+                "http://localhost:8080/greeting",
+                "http://localhost:8080/greeting?name=YourName",
+                "http://localhost:8080/greeting?name=IMBADGRAH",
+                "http://localhost:8080/greeting?name=IMFORBIDDENGRAH"
+        );
+    }
+
     @GetMapping("/")
-    public ResponseEntity<String> home() {
+    public ResponseEntity<HomeResponse> home() {
+        HomeResponse response = new HomeResponse(
+                String.format(template_home, "/"),
+                generateLinks()
+        );
+
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(String.format(template_home, "/"));
+                .body(response);
     }
 
     @GetMapping("/greeting")
-    public ResponseEntity<Greeting> greeting(@RequestParam(defaultValue = "World") String name) {
-        Greeting bad = new Greeting(counter.incrementAndGet(), "Welcome to the bad realm");
-        if (name.equalsIgnoreCase("IM BAD GRAH")) {
+    public ResponseEntity<HomeResponse> greeting(@RequestParam(defaultValue = "World") String name) {
+        String message;
+        if (name.equalsIgnoreCase("IMBADGRAH")) {
+            message = "Welcome to the bad realm";
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
-                    .body(bad);
+                    .body(new HomeResponse(message, generateLinks()));
         }
-        Greeting forbid = new Greeting(counter.incrementAndGet(), "Welcome to the forbidden realm");
-        if (name.equalsIgnoreCase("IM FORBIDDEN GRAH")) {
+        if (name.equalsIgnoreCase("IMFORBIDDENGRAH")) {
+            message = "Welcome to the forbidden realm";
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
-                    .body(forbid);
+                    .body(new HomeResponse(message, generateLinks()));
         }
-        Greeting greeting = new Greeting(counter.incrementAndGet(), String.format(template, name));
+        message = String.format(template, name);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(greeting);
+                .body(new HomeResponse(message, generateLinks()));
     }
 
 }
