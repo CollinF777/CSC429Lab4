@@ -16,11 +16,11 @@ public class GreetingController {
 
     private Links generateLinks() {
         return new Links(
-                "http://localhost:8080/",
-                "http://localhost:8080/greeting",
-                "http://localhost:8080/greeting?name=YourName",
-                "http://localhost:8080/greeting?name=IMBADGRAH",
-                "http://localhost:8080/greeting?name=IMFORBIDDENGRAH"
+                "/",
+                "/greeting",
+                "/greeting?name=YourName",
+                "/greeting?name=IMBADGRAH",
+                "/greeting?name=IMFORBIDDENGRAH"
         );
     }
 
